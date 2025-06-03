@@ -2,6 +2,7 @@ import Header from "~/components/HomeHeader";
 import type { Route } from "./+types/home";
 import ShopCart from "~/components/ShopCart";
 import BottomNavigation from "~/components/BottomNavigation";
+import SearchInput from "~/components/SearchInput";
 
 export function meta({}: Route.MetaArgs) {
   return [
