@@ -13,3 +13,15 @@ body {
     color-scheme: dark;
   }
 }
+
+h1{
+  @apply text-[26px] font-bold;
+}
+
+h4{
+  @apply text-[17px] font-semibold;
+}
+
+.caption{
+  @apply text-[14px];
+}
