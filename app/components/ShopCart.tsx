@@ -26,9 +26,7 @@ export default function ShopCart({ img, name, price, currency="NOT" }: ShopCartP
     const handleMouseMove = (e: MouseEvent | TouchEvent) => {
         if (startY !== null) {
             const currentY = 'clientY' in e ? e.clientY : e.touches[0].clientY;
-            const currentX = 'clientX' in e ? e.clientX : e.touches[0].clientX;
             const deltaY = currentY - startY;
-            const deltaX = currentX - ('clientX' in e ? startY : e.touches[0].clientX);
             setPullDeltaY(deltaY);
 
             e.preventDefault();
@@ -54,19 +52,19 @@ export default function ShopCart({ img, name, price, currency="NOT" }: ShopCartP
             // Use non-passive event listeners to ensure preventDefault works
             container.addEventListener('mousedown', handleMouseDown as EventListener, { passive: false });
             container.addEventListener('touchstart', handleMouseDown as EventListener, { passive: false });
-            container.addEventListener('mousemove', handleMouseMove as EventListener, { passive: false });
-            container.addEventListener('touchmove', handleMouseMove as EventListener, { passive: false });
-            container.addEventListener('mouseup', handleMouseUp as EventListener, { passive: false });
-            container.addEventListener('touchend', handleMouseUp as EventListener, { passive: false });
+            window.addEventListener('mousemove', handleMouseMove as EventListener, { passive: false });
+            window.addEventListener('touchmove', handleMouseMove as EventListener, { passive: false });
+            window.addEventListener('mouseup', handleMouseUp as EventListener, { passive: false });
+            window.addEventListener('touchend', handleMouseUp as EventListener, { passive: false });
 
             return () => {
                 // Clean up event listeners on component unmount
                 container.removeEventListener('mousedown', handleMouseDown as EventListener);
                 container.removeEventListener('touchstart', handleMouseDown as EventListener);
-                container.removeEventListener('mousemove', handleMouseMove as EventListener);
-                container.removeEventListener('touchmove', handleMouseMove as EventListener);
-                container.removeEventListener('mouseup', handleMouseUp as EventListener);
-                container.removeEventListener('touchend', handleMouseUp as EventListener);
+                window.removeEventListener('mousemove', handleMouseMove as EventListener);
+                window.removeEventListener('touchmove', handleMouseMove as EventListener);
+                window.removeEventListener('mouseup', handleMouseUp as EventListener);
+                window.removeEventListener('touchend', handleMouseUp as EventListener);
             };
         }
     }, [startY, pullDeltaY]);
@@ -75,6 +73,7 @@ export default function ShopCart({ img, name, price, currency="NOT" }: ShopCartP
         <div
             className="dark:text-white text-black"
             ref={containerRef}
+            style={{ overscrollBehaviorY: 'contain' }}
         >
             <div className="relative">
                 <div
@@ -84,7 +83,7 @@ export default function ShopCart({ img, name, price, currency="NOT" }: ShopCartP
                         bottom: isPulledUp ? '97%' : '8px',
                         width: isPulledUp ? '60px' : '20px',
                         transition: startY !== null ? 'none' : 'bottom 0.3s ease-out, width 0.3s ease-out', // Disable transition during drag
-                        transform: startY !== null ? `translateY(${pullDeltaY}px)` : 'translateY(0)', // Apply transform during drag
+                        transform: startY !== null && pullDeltaY < 0 ? `translateY(${pullDeltaY}px)` : 'translateY(0)', // Apply transform during drag only when pulling up
                     }}
                 ></div>
                 <img className="rounded-2xl aspect-square object-cover" src={img} alt={name} />

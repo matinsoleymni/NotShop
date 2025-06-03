@@ -8,9 +8,9 @@ export default function Header({ title, icons: IconComponent }: HeaderProps) {
     <header className="flex z-50 sticky top-0 w-full bg-white/50 dark:bg-black/50 backdrop-blur-3xl items-center justify-between mb-2 p-4 dark:text-white text-black">
         <h1>{title}</h1>
         <div className='flex items-center gap-2'>
-            {IconComponent.map((Icon, index) => {
-                return <Icon key={index} className="dark:fill-white fill-black" />;
-            })}
+            {IconComponent.map((Icon, index) => (
+                <Icon key={index} className="fill-black dark:fill-white" />
+            ))}
         </div>
     </header>
   );
