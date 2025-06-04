@@ -32,7 +32,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="h-full pb-24">
         {children}
         <div id="modal-root"></div>
         <ScrollRestoration />

@@ -66,7 +66,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className }) =
     >
       <div
         ref={modalRef}
-        className={`w-full transform rounded-t-lg bg-white dark:bg-black p-4 shadow-lg transition-transform duration-300 ease-out flex flex-col ${
+        className={`w-full transform rounded-t-lg bg-white dark:bg-black p-4 shadow-xl shadow-black dark:shadow-white transition-transform duration-300 ease-out flex flex-col ${
           animateIn ? 'translate-y-0' : 'translate-y-full'
         } ${className || ''}`}
         role="dialog"

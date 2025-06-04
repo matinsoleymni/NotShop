@@ -9,7 +9,7 @@ export default function BottomNavigation() {
                 <p className="mt-1 text-[10px] font-medium">Store</p>
             </NavLink>
             <NavLink to="/profile" className={"flex flex-col items-center"}>
-                <NotLogo className="w-6 h-6 mx-auto dark:invert-100" />
+                <img src="/images/Ava.png" className="w-6 h-6 rounded-full object-top mx-auto" />
                 <p className="mt-1 text-[10px] font-medium">Alex</p>
             </NavLink>
         </nav>
