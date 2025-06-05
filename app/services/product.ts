@@ -9,6 +9,5 @@ async function sendRequest(url: string, method: string = 'GET') {
 
 export async function getAllProducts() {
   const res = await sendRequest('/items.json', 'GET')
-  console.log('Products fetched:', res.data);
   return res.data;
 }

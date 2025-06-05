@@ -1,48 +1,29 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import type { ReactNode } from 'react';
+"use client";
 
-import { WebApp } from '@twa-dev/types';
-
-declare global {
-    interface Window {
-        Telegram: {
-            WebApp: WebApp;
-        };
-    }
-}
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { init, swipeBehavior, requestFullscreen, retrieveLaunchParams, type LaunchParams, isMiniAppSupported } from '@telegram-apps/sdk';
+import type { User } from '@telegram-apps/sdk';
 
 interface TMAContextType {
-    webApp: WebApp | null;
-    isLoaded: boolean;
-    user: WebApp['initDataUnsafe']['user'] | null;
+    launchParams: LaunchParams | undefined;
+    user: User | undefined;
 }
 
-const TMAContext = createContext<TMAContextType>({
-    webApp: null,
-    isLoaded: false,
-    user: null,
-});
+const TMAContext = createContext<TMAContextType | undefined>(undefined);
 
-export const TMAProvider = ({ children }: { children: ReactNode }) => {
-    const [webApp, setWebApp] = useState<WebApp | null>(null);
-    const [isLoaded, setIsLoaded] = useState(false);
+export const TMAProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [launchParams, setLaunchParams] = useState<LaunchParams | undefined>(undefined);
 
     useEffect(() => {
-        if (window.Telegram?.WebApp) {
-            const tg = window.Telegram.WebApp;
-            setWebApp(tg);
-            tg.ready();
-            setIsLoaded(true);
-        }
+        const lp = retrieveLaunchParams();
+        setLaunchParams(lp);
     }, []);
 
-    const value = {
-        webApp,
-        isLoaded,
-        user: webApp?.initDataUnsafe?.user ?? null,
-    };
-
-    return <TMAContext.Provider value={value}>{children}</TMAContext.Provider>;
+    return (
+        <TMAContext.Provider value={{ launchParams, user: launchParams?.tgWebAppData?.user }}>
+            {children}
+        </TMAContext.Provider>
+    );
 };
 
 export const useTMA = () => {
@@ -52,5 +33,3 @@ export const useTMA = () => {
     }
     return context;
 };
-
-export default TMAContext;

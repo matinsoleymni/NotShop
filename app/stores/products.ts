@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { getAllProducts } from '../services/product';
 
-interface Product {
+export interface Product {
     id: number;
     name: string;
     category: string;
@@ -21,6 +21,7 @@ interface ProductStore {
     fetchProducts: () => Promise<void>;
     setSearchTerm: (term: string) => void;
     getFilteredProducts: () => Product[];
+    getProductById: (id: number) => Product | null;
 }
 
 export const useProductStore = create<ProductStore>((set, get) => ({
@@ -32,7 +33,6 @@ export const useProductStore = create<ProductStore>((set, get) => ({
     fetchProducts: async () => {
         const { products, loading } = get();
         if (products.length > 0 || loading) {
-            // Products already fetched or currently loading, do nothing
             return;
         }
 
@@ -55,4 +55,12 @@ export const useProductStore = create<ProductStore>((set, get) => ({
             product.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
     },
+    getProductById:(id: number) => {
+        const { products, fetchProducts } = get();
+        if (products.length === 0) {
+            fetchProducts();
+        }
+        const updatedProducts = get().products;
+        return updatedProducts.find(product => product.id === id) || null;
+    }
 }));

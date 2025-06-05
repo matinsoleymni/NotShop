@@ -1,17 +1,13 @@
-import { NavLink } from "react-router";
-import NotLogo from "../assets/icons/logo.svg?react";
+import { type PropsWithChildren } from 'react';
 
-export default function BottomNavigation() {
+interface BottomNavigationProps extends PropsWithChildren {
+    className?: string;
+}
+
+export default function BottomNavigation({ children, className }: BottomNavigationProps) {
     return (
-        <nav className="px-5 py-4 fixed w-full bottom-0 grid grid-cols-2 bg-white dark:bg-black dark:text-white text-black">
-             <NavLink to="/" className={"flex flex-col items-center"}>
-                <NotLogo className="w-6 h-6 mx-auto dark:invert-100" />
-                <p className="mt-1 text-[10px] font-medium">Store</p>
-            </NavLink>
-            <NavLink to="/profile" className={"flex flex-col items-center"}>
-                <img src="/images/Ava.png" className="w-6 h-6 rounded-full object-top mx-auto" />
-                <p className="mt-1 text-[10px] font-medium">Alex</p>
-            </NavLink>
+        <nav className={`px-5 py-4 fixed w-full bottom-0 grid grid-cols-2 bg-white dark:bg-black dark:text-white text-black ${className}`}>
+            {children}
         </nav>
     );
 }

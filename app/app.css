@@ -7,18 +7,22 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950 select-none;
+  @apply bg-white dark:bg-gray-950 select-none h-full;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
 }
 
-h1{
+h1,.h1{
   @apply text-[26px] font-bold text-black dark:text-white;
 }
 
-h4{
+h3,.h3{
+    @apply text-[20px] font-semibold text-black dark:text-white;
+}
+
+h4,.h4{
   @apply text-[17px] font-semibold text-black dark:text-white;
 }
 
@@ -46,7 +50,7 @@ h4{
 .search-input-overlay.hidden {
   opacity: 0;
   pointer-events: none;
-  position: absolute; /* To maintain header space */
+  position: absolute;
 }
 
 .search-input-overlay {
