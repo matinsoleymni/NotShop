@@ -3,7 +3,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "remix-serve ./build/index.js",
     "dev": "vite",
     "build": "vite build",
     "typecheck": "tsc",
@@ -29,6 +28,7 @@
     "@types/react-dom": "^19.1.2",
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "@typescript-eslint/parser": "^8.33.1",
+    "@vercel/react-router": "^1.1.2",
     "eslint": "^9.28.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
