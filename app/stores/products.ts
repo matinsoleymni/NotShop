@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { getAllProducts } from '../services/product';
+import { getAllProducts } from '../services/api/product';
 
 export interface Product {
     id: number;

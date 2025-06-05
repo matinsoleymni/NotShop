@@ -1,5 +1,4 @@
 import GeneralHeader from "~/components/GeneralHeader";
-import Shear from "../../assets/icons/share.svg?react";
 import type { Route } from "./+types";
 import { useProductStore, type Product } from "~/stores/products";
 import { useEffect, useState } from "react";
@@ -7,6 +6,14 @@ import BottomNavigation from "~/components/BottomNavigation";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import Button from "~/components/ui/Button";
 import { useCart, type Product as CartProduct } from "~/contexts/CartContext";
+import Share from "~/components/Share";
+
+export function meta({ }: Route.MetaArgs) {
+    return [
+        { title: `Product Page` },
+        { name: "description", content: "Product details page" },
+    ];
+}
 
 export default function Product({ params }: Route.LoaderArgs) {
     const id = params.product;
@@ -55,12 +62,36 @@ export default function Product({ params }: Route.LoaderArgs) {
     };
 
     if (!product) {
-        return <div>Loading...</div>;
+        return (
+            <>
+                <GeneralHeader title="Loading..." icons={[]} />
+                <div className="flex flex-col px-4 pb-24 animate-pulse">
+                    <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
+                    <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+                    <div className="h-4 bg-gray-300 rounded w-5/6 mb-4"></div>
+                    <div className="flex flex-wrap pt-4 pb-5 gap-2">
+                        <div className="h-6 w-20 bg-gray-300 rounded-full"></div>
+                        <div className="h-6 w-16 bg-gray-300 rounded-full"></div>
+                        <div className="h-6 w-24 bg-gray-300 rounded-full"></div>
+                    </div>
+                    <div className="w-full h-92 bg-gray-300 rounded-[20px] mb-4"></div>
+                    <div className="flex w-full gap-2 pt-4 overflow-x-auto">
+                        <div className="min-w-[100px] min-h-[100px] aspect-square bg-gray-300 rounded-xl"></div>
+                        <div className="min-w-[100px] min-h-[100px] aspect-square bg-gray-300 rounded-xl"></div>
+                        <div className="min-w-[100px] min-h-[100px] aspect-square bg-gray-300 rounded-xl"></div>
+                    </div>
+                </div>
+                <BottomNavigation className="gap-3">
+                    <div className="h-12 w-full bg-gray-300 rounded-lg"></div>
+                    <div className="h-12 w-full bg-gray-300 rounded-lg"></div>
+                </BottomNavigation>
+            </>
+        );
     }
 
     return (
         <>
-            <GeneralHeader title={product.name} icons={[Shear]} />
+            <GeneralHeader title={product.name} icons={[<Share id={id} title={product.name} />]} />
             <div className="flex flex-col px-4 pb-24">
                 <p className="text-[17px]">
                     {product.description}
@@ -108,9 +139,9 @@ export default function Product({ params }: Route.LoaderArgs) {
             <BottomNavigation className="gap-3">
                 {isInCart ? (
                     <div className="flex items-center justify-center gap-2">
-                        <Button className="h4" onClick={handleDecrementQuantity} size="big" variant="ghost">-</Button>
+                        <Button className="h4 cursor-pointer" onClick={handleDecrementQuantity} size="big" variant="ghost">-</Button>
                         <p className="h3">{quantity}</p>
-                        <Button className="h4" onClick={handleIncrementQuantity} size="big" variant="ghost">+</Button>
+                        <Button className="h4 cursor-pointer" onClick={handleIncrementQuantity} size="big" variant="ghost">+</Button>
                     </div>
                 ) : (
                     <Button onClick={handleAddToCart} size="big" variant="ghost">Add to Cart</Button>

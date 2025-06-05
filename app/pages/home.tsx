@@ -3,7 +3,7 @@ import type { Route } from "./+types/home";
 import ShopCart from "~/components/ShopCart";
 import BottomNavigation from "~/components/BottomNavigation";
 import { useProductStore } from "~/stores/products";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink } from "react-router";
 import NotLogo from "../assets/icons/logo.svg?react";
 import { useCart } from "../contexts/CartContext";
@@ -12,7 +12,7 @@ import Button from "~/components/ui/Button";
 import { formatPrice } from "~/utils/formatPrice";
 import { useTMA } from "~/contexts/TMAContext";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
     return [
         { title: "Not Store" },
         { name: "description", content: "The Not Contest store" },
@@ -92,11 +92,17 @@ export default function Home() {
                     </CartModal>
                 ) : (
                     <>
-                        <NavLink to="/" className={"flex flex-col items-center"}>
+                        <NavLink to="/" className={({ isActive }) =>
+                            isActive
+                                ? "flex flex-col items-center"
+                                : "flex flex-col items-center opacity-50"}>
                             <NotLogo className="w-6 h-6 mx-auto dark:invert-100" />
                             <p className="mt-1 text-[10px] font-medium">Store</p>
                         </NavLink>
-                        <NavLink to="/profile" className={"flex flex-col items-center"}>
+                        <NavLink to="/profile" className={({ isActive }) =>
+                            isActive
+                                ? "flex flex-col items-center"
+                                : "flex flex-col items-center opacity-50"}>
                             {user?.photo_url ? (
                                 <img src={user?.photo_url} className="w-6 h-6 rounded-full object-top mx-auto" />
                             ) : (

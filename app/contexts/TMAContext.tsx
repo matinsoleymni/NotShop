@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { init, swipeBehavior, requestFullscreen, retrieveLaunchParams, type LaunchParams, isMiniAppSupported } from '@telegram-apps/sdk';
+import { swipeBehavior, requestFullscreen, retrieveLaunchParams, backButton, type LaunchParams } from '@telegram-apps/sdk';
 import type { User } from '@telegram-apps/sdk';
 
 interface TMAContextType {
@@ -16,6 +16,10 @@ export const TMAProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     useEffect(() => {
         const lp = retrieveLaunchParams();
+        // swipeBehavior.mount();
+        // swipeBehavior.enableVertical();
+        // backButton.mount();
+        // backButton.show();
         setLaunchParams(lp);
     }, []);
 

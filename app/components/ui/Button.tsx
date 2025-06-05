@@ -1,9 +1,9 @@
 const getVariantClasses = (variant: "primary" | "ghost") => {
   switch (variant) {
     case "primary":
-      return "bg-black dark:bg-white text-white dark:text-black";
+      return "bg-black cursor-pointer dark:bg-white text-white dark:text-black";
     case "ghost":
-      return "bg-transparent text-black dark:text-white";
+      return "bg-black/8 dark:bg-white/8 text-black dark:text-white";
     default:
       return "";
   }
