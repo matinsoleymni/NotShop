@@ -9,6 +9,7 @@ This document provides end-to-end documentation for the `app/` directory and its
     - [app.css](#appcss)
     - [root.tsx](#roottx)
     - [routes.ts](#routests)
+    - [Packages](packages.md)
 3. [Directories](#directories)
     - [assets/](assets.md)
     - [components/](components.md)
@@ -18,12 +19,14 @@ This document provides end-to-end documentation for the `app/` directory and its
     - [services/](services.md)
     - [stores/](stores.md)
     - [utils/](utils.md)
+4. [bot/](bot.md)
 
 ## Project Structure
 
 The `app/` directory contains the main application code, organized into several subdirectories based on their functionality.
 
 ```
+bot/
 app/
 ├── app.css
 ├── assets/
@@ -93,3 +96,7 @@ This directory contains state management stores, likely using a library like Zus
 ### utils/
 
 This directory contains utility functions used across the application.
+
+### bot/
+
+This directory contains minimal telegram bot.
