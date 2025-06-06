@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { useTMA } from "~/contexts/TMAContext";
-import type { Route } from "./+types/home";
 import { useHistoryStore } from '../stores/history';
 import { useProductStore } from '../stores/products';
 import { formatPrice } from '../utils/formatPrice';
@@ -8,14 +7,8 @@ import BottomNavigation from '~/components/BottomNavigation';
 import { NavLink } from 'react-router';
 import NotLogo from "../assets/icons/logo.svg?react";
 
-export function meta({ }: Route.MetaArgs) {
-    return [
-        { title: `Profile` },
-        { name: "description", content: "User profile page" },
-    ];
-}
 
-export default function Home() {
+export default function ProfilePage() {
     const { user } = useTMA();
     const { history, displayedHistory, loading, fetchHistory, loadMoreHistory } = useHistoryStore();
     const { products, fetchProducts } = useProductStore();

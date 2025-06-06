@@ -1,5 +1,4 @@
 import Header from "~/components/HomeHeader";
-import type { Route } from "./+types/home";
 import ShopCart from "~/components/ShopCart";
 import BottomNavigation from "~/components/BottomNavigation";
 import { useProductStore } from "~/stores/products";
@@ -12,14 +11,8 @@ import Button from "~/components/ui/Button";
 import { formatPrice } from "~/utils/formatPrice";
 import { useTMA } from "~/contexts/TMAContext";
 
-export function meta({ }: Route.MetaArgs) {
-    return [
-        { title: "Not Store" },
-        { name: "description", content: "The Not Contest store" },
-    ];
-}
 
-export default function Home() {
+export default function HomePage() {
     const { products, loading, error, fetchProducts, getFilteredProducts } = useProductStore();
     const filteredProducts = getFilteredProducts();
     const { cartItems } = useCart();

@@ -1,5 +1,4 @@
 import GeneralHeader from "~/components/GeneralHeader";
-import type { Route } from "./+types";
 import { useProductStore, type Product } from "~/stores/products";
 import { useEffect, useState } from "react";
 import BottomNavigation from "~/components/BottomNavigation";
@@ -8,15 +7,10 @@ import Button from "~/components/ui/Button";
 import { useCart, type Product as CartProduct } from "~/contexts/CartContext";
 import Share from "~/components/Share";
 import PaymentSuccess from "~/components/PaymentSuccess";
+import type { Route } from "../../+types/root";
 
-export function meta({ }: Route.MetaArgs) {
-    return [
-        { title: `Product Page` },
-        { name: "description", content: "Product details page" },
-    ];
-}
 
-export default function Product({ params }: Route.LoaderArgs) {
+export default function ProductPage({ params }: Route.LoaderArgs) {
     const id = params.product;
     const { getProductById, products } = useProductStore();
     const [product, setProduct] = useState<Product | null>(null);
@@ -95,7 +89,7 @@ export default function Product({ params }: Route.LoaderArgs) {
         <div className="flex flex-col h-screen">
 
             {showPaymentSuccess && <PaymentSuccess onClose={()=> {setShowPaymentSuccess(false)}} />}
-            <GeneralHeader title={product.name} icons={[<Share id={id} title={product.name} />]} />
+            <GeneralHeader title={product.name} icons={[<Share id={id as string} title={product.name} />]} />
             <div className="flex pb-20 flex-col px-4 min-h-0 flex-grow">
                 <p className="text-[17px] flex-shrink-0">
                     {product.description}
