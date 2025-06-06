@@ -1,5 +1,3 @@
-"use client";
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { swipeBehavior, requestFullscreen, retrieveLaunchParams, backButton, type LaunchParams } from '@telegram-apps/sdk';
 import type { User } from '@telegram-apps/sdk';
@@ -23,7 +21,7 @@ export const TMAProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             const productId = lp.tgWebAppData?.start_param.split('_')[1];
             redirect(`/product/${productId}`);
         }
-        
+
     }, []);
 
     return (
