@@ -63,7 +63,7 @@ export default function ShopCart({
     };
 
     const handleMouseUp = () => {
-        const swipeThreshold = 20;
+        const swipeThreshold = 50;
         if (deltaX > swipeThreshold) {
             // Swipe right
             setCurrentImageIndex((prevIndex) =>

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import BottomNavigation from "~/components/BottomNavigation";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import Button from "~/components/ui/Button";
+import Modal from "~/components/ui/Modal";
+import ZoomableImageModalContent from "~/components/ZoomableImageModalContent";
 import { useCart, type Product as CartProduct } from "~/contexts/CartContext";
 import Share from "~/components/Share";
 import PaymentSuccess from "~/components/PaymentSuccess";
@@ -18,6 +20,8 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
     const [tonConnectUI] = useTonConnectUI();
     const { cartItems, addToCart, removeFromCart, updateQuantity } = useCart();
     const [showPaymentSuccess, setShowPaymentSuccess] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalImageUrl, setModalImageUrl] = useState('');
 
     const cartItem = cartItems.find(item => item.id === Number(id));
     const isInCart = !!cartItem;
@@ -90,7 +94,7 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
 
             {showPaymentSuccess && <PaymentSuccess onClose={()=> {setShowPaymentSuccess(false)}} />}
             <GeneralHeader title={product.name} icons={[<Share id={id as string} title={product.name} />]} />
-            <div className="flex pb-20 flex-col px-4 min-h-0 flex-grow">
+            <div className="flex pb-24 flex-col px-4 min-h-0 flex-grow">
                 <p className="text-[17px] flex-shrink-0">
                     {product.description}
                 </p>
@@ -111,7 +115,10 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
                     ))}
 
                 </div>
-                <div className="flex-grow overflow-hidden">
+                <div className="flex-grow overflow-hidden cursor-pointer" onClick={() => {
+                    setModalImageUrl(product.images[selectedImageIndex]);
+                    setIsModalOpen(true);
+                }}>
                     <img
                         className="rounded-[20px] w-full h-full object-cover object-center"
                         src={product.images[selectedImageIndex]}
@@ -152,6 +159,10 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
                     }, 1500)
                 }} size="big" variant="primary">Buy Now</Button>
             </BottomNavigation>
+
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} className="!rounded-t-none !p-0 !bg-transparent !shadow-none !w-screen !h-screen !items-center !justify-center">
+                <ZoomableImageModalContent imageUrl={modalImageUrl} onClose={() => setIsModalOpen(false)} />
+            </Modal>
         </div>
     );
 }

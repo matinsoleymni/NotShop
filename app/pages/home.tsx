@@ -39,8 +39,10 @@ export default function HomePage() {
                             >
                                 <div
                                     key={`placholder-image` + index}
-                                    className="bg-gray-200 dark:bg-gray-800 h-40 animate-pulse rounded-md"
-                                ></div>
+                                    className="bg-gray-200 flex items-center justify-around dark:bg-gray-800 h-40 animate-pulse rounded-md"
+                                >
+                                    <NotLogo className="w-32 h-32 opacity-40" />
+                                </div>
                                 <div
                                     key={`placholder-title` + index}
                                     className="bg-gray-200 dark:bg-gray-800 h-5 animate-pulse rounded-full"

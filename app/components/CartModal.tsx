@@ -1,9 +1,9 @@
 import Modal from "./ui/Modal";
-import CartIcon from "../assets/icons/cart.svg?react";
 import { useState, type PropsWithChildren } from "react";
 import Button from "./ui/Button";
 import { formatPrice } from "~/utils/formatPrice";
 import { useCart } from "~/contexts/CartContext";
+import { useTonConnectUI } from "@tonconnect/ui-react";
 
 interface CartModalProps extends PropsWithChildren {
     className?: string
@@ -11,10 +11,14 @@ interface CartModalProps extends PropsWithChildren {
 
 export default function CartModal({ children, className }: CartModalProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const { cartItems, cartItemCount, removeFromCart } = useCart();
+    const { cartItems, cartItemCount, removeFromCart, updateQuantity } = useCart();
+    const [tonConnectUI] = useTonConnectUI();
 
     const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
+    const handelPayment = ()=> {
+        tonConnectUI.openModal();
+    }
 
     const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
@@ -89,7 +93,7 @@ export default function CartModal({ children, className }: CartModalProps) {
                                             <span className="text-black dark:text-white text-[17px]">
                                                 {item.price} {item.currency}
                                             </span>
-                                            <button onClick={() => removeFromCart(item.id)}>
+                                            <button className="cursor-pointer" onClick={() => item.quantity > 1 ? updateQuantity(item.id, item.quantity - 1) : removeFromCart(item.id)}>
                                                 <svg className="fill-black dark:fill-white" width="28" height="29" viewBox="0 0 28 29" xmlns="http://www.w3.org/2000/svg">
                                                     <rect y="0.894531" width="28" height="28" rx="8" fill-opacity="0.08"/>
                                                     <path className="fill-black dark:fill-white" opacity="0.2" d="M20 14.1445C20.4142 14.1445 20.75 14.4803 20.75 14.8945C20.75 15.3087 20.4142 15.6445 20 15.6445H8C7.58579 15.6445 7.25 15.3087 7.25 14.8945C7.25 14.4803 7.58579 14.1445 8 14.1445H20Z"/>
@@ -114,7 +118,7 @@ export default function CartModal({ children, className }: CartModalProps) {
                         <Button
                             variant="primary"
                             size="big"
-                            onClick={handleClose}
+                            onClick={handelPayment}
                         >
                             Buy for {formatPrice(totalPrice, cartItems.length > 0 ? cartItems[0].currency : 'USD')}
                         </Button>

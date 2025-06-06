@@ -22,6 +22,9 @@ export const TMAProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             swipeBehavior.enableVertical();
             backButton.mount();
             backButton.show();
+            backButton.onClick(() => {
+                navigate("/");
+            })
             const lp = retrieveLaunchParams();
             setLaunchParams(lp);
 
