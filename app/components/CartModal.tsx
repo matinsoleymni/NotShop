@@ -77,7 +77,7 @@ export default function CartModal({ children, className }: CartModalProps) {
                                     >
                                         <div className="flex items-center gap-3">
                                             <img
-                                                src={item.images[0]}
+                                                src={item.images[item.id-1]}
                                                 alt={item.name}
                                                 className="w-[60px] h-[60px] object-cover rounded-lg"
                                             />
