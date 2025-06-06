@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { swipeBehavior, requestFullscreen, retrieveLaunchParams, backButton, type LaunchParams } from '@telegram-apps/sdk';
+import { swipeBehavior, retrieveLaunchParams, backButton, type LaunchParams } from '@telegram-apps/sdk';
 import type { User } from '@telegram-apps/sdk';
 import { redirect } from 'react-router';
 
@@ -14,6 +14,10 @@ export const TMAProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const [launchParams, setLaunchParams] = useState<LaunchParams | undefined>(undefined);
 
     useEffect(() => {
+        swipeBehavior.mount();
+        swipeBehavior.enableVertical();
+        backButton.mount();
+        backButton.show();
         const lp = retrieveLaunchParams();
         setLaunchParams(lp);
 
