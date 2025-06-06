@@ -26,8 +26,8 @@ export const useHistoryStore = create<HistoryStore>((set, get) => ({
     error: null,
 
     fetchHistory: async () => {
-        const { history, loading } = get();
-        if (history.length > 0 || loading) {
+        const { history } = get();
+        if (history.length > 0) {
             return;
         }
 
