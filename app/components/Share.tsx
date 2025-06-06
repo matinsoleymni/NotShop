@@ -10,15 +10,14 @@ interface ShareProps {
 export default function Share({ id, title }: ShareProps) {
     const handleShare = async () => {
         try {
-            alert("Sharing product...");
-            await shareURL("https://example.com/product/"+id, title);
-            console.log("Product shared successfully!");
+            await shareURL("https://t.me/notStore24Bot?startapp=product_"+id, title);
         } catch (error) {
+            alert("There was a problem sharing the link")
             console.error("Failed to share product:", error);
         }
     };
     return (
-        <Button variant="ghost" size="small" onClick={handleShare} className="cursor-pointer">
+        <Button variant="ghost" size="small" onClick={handleShare} className="cursor-pointer bg-transparent !p-0">
             <Shear className="fill-black dark:fill-white" />
         </Button>
     );

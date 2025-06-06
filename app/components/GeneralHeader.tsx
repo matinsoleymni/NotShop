@@ -11,9 +11,9 @@ export default function GeneralHeader({ title, icons }: HeaderProps) {
                 <h1>{title}</h1>
                 <div className='flex items-center gap-2'>
                         {icons.map((Icon, index) => (
-                                <div key={index}>
-                                        {Icon}
-                                </div>
+                            <div key={index}>
+                                {Icon}
+                            </div>
                         ))}
                 </div>
         </header>

@@ -47,7 +47,7 @@ export default function Home() {
 
     return (
         <>
-            <div className="flex flex-col pt-10 px-4">
+            <div className="flex flex-col h-full pt-10 px-4">
                 <div className="text-center space-y-2">
                     {user?.photo_url ? (
                         <img src={user?.photo_url} className="w-30 h-30 rounded-full object-top mx-auto" />
@@ -58,54 +58,66 @@ export default function Home() {
                     )}
                     <h1>{user?.first_name} {user?.last_name}</h1>
                 </div>
-                <div className="mt-8 pb-24">
-                    <h3>History</h3>
-                    <div className="space-y-3 mt-4" ref={historyListRef}>
-                        {loading && displayedHistory.length === 0 ? (
-                            Array.from({ length: 5 }).map((_, index) => (
-                                <div key={index} className="flex items-center justify-between rounded-lg animate-pulse">
-                                    <div className="flex items-center space-x-3">
-                                        <div className="w-[60px] h-[60px] rounded-lg bg-gray-300 dark:bg-gray-700"></div>
-                                        <div className="space-y-1">
-                                            <div className="h-3 w-24 rounded bg-gray-300 dark:bg-gray-700"></div>
-                                            <div className="h-4 w-32 rounded bg-gray-300 dark:bg-gray-700"></div>
-                                        </div>
-                                    </div>
-                                    <div className="text-right space-y-1">
-                                        <div className="h-3 w-16 rounded bg-gray-300 dark:bg-gray-700"></div>
-                                        <div className="h-4 w-20 rounded bg-gray-300 dark:bg-gray-700"></div>
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            displayedHistory.map(historyItem => {
-                                const product = products.find(p => p.id === historyItem.id);
-                                const date = new Date(historyItem.timestamp * 1000);
-                                const formattedDate = date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: '2-digit' });
-
-                                return (
-                                    <div key={historyItem.id} className="flex items-center justify-between rounded-lg">
+                <div className="mt-8 pb-24 h-full">
+                    {loading ? (
+                        <>
+                            <h3>History</h3>
+                            <div className="space-y-3 mt-4" ref={historyListRef}>
+                                {Array.from({ length: 5 }).map((_, index) => (
+                                    <div key={index} className="flex items-center justify-between rounded-lg animate-pulse">
                                         <div className="flex items-center space-x-3">
-                                            {product?.images?.[0] && (
-                                                <img src={product.images[product.id - 1]} alt={product.name} className="w-[60px] h-[60px] rounded-lg object-cover" />
-                                            )}
-                                            <div>
-                                                <p className="text-black/50 text-[12px] dark:text-white/50">{product?.category}</p>
-                                                <h4>{product?.name}</h4>
+                                            <div className="w-[60px] h-[60px] rounded-lg bg-gray-300 dark:bg-gray-700"></div>
+                                            <div className="space-y-1">
+                                                <div className="h-3 w-24 rounded bg-gray-300 dark:bg-gray-700"></div>
+                                                <div className="h-4 w-32 rounded bg-gray-300 dark:bg-gray-700"></div>
                                             </div>
                                         </div>
-                                        <div className="text-right">
-                                            <p className="text-black/50 text-[12px] dark:text-white/50">{formattedDate}</p>
-                                            <h4>{formatPrice(historyItem.total, historyItem.currency)}</h4>
+                                        <div className="text-right space-y-1">
+                                            <div className="h-3 w-16 rounded bg-gray-300 dark:bg-gray-700"></div>
+                                            <div className="h-4 w-20 rounded bg-gray-300 dark:bg-gray-700"></div>
                                         </div>
                                     </div>
-                                );
-                            })
-                        )}
-                        {loading && displayedHistory.length > 0 && (
-                            <p className="text-center">Loading more history...</p>
-                        )}
-                    </div>
+                                ))}
+                            </div>
+                        </>
+                    ) : !loading && displayedHistory.length === 0 ? (
+                        <div className='h-full flex justify-center items-center flex-col'>
+                            <h3 className="h1">No history yet</h3>
+                            <p className="">Let’s change that</p>
+                        </div>
+                    ) : (
+                        <>
+                            <h3>History</h3>
+                            <div className="space-y-3 mt-4" ref={historyListRef}>
+                                {displayedHistory.map(historyItem => {
+                                    const product = products.find(p => p.id === historyItem.id);
+                                    const date = new Date(historyItem.timestamp * 1000);
+                                    const formattedDate = date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: '2-digit' });
+
+                                    return (
+                                        <div key={historyItem.id} className="flex items-center justify-between rounded-lg">
+                                            <div className="flex items-center space-x-3">
+                                                {product?.images?.[0] && (
+                                                    <img src={product.images[product.id - 1]} alt={product.name} className="w-[60px] h-[60px] rounded-lg object-cover" />
+                                                )}
+                                                <div>
+                                                    <p className="text-black/50 text-[12px] dark:text-white/50">{product?.category}</p>
+                                                    <h4>{product?.name}</h4>
+                                                </div>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="text-black/50 text-[12px] dark:text-white/50">{formattedDate}</p>
+                                                <h4>{formatPrice(historyItem.total, historyItem.currency)}</h4>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </>
+                    )}
+                    {loading && displayedHistory.length > 0 && (
+                        <p className="text-center">Loading more history...</p>
+                    )}
                 </div>
             </div>
             <BottomNavigation>

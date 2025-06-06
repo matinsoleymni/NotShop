@@ -22,7 +22,7 @@ export const useHistoryStore = create<HistoryStore>((set, get) => ({
     history: [],
     displayedHistory: [],
     itemsToDisplay: 10,
-    loading: false,
+    loading: true,
     error: null,
 
     fetchHistory: async () => {
@@ -31,7 +31,6 @@ export const useHistoryStore = create<HistoryStore>((set, get) => ({
             return;
         }
 
-        set({ loading: true });
         try {
             const data = await getHistory();
             const sortedData = data.sort((a: HistoryItem, b: HistoryItem) => b.timestamp - a.timestamp);

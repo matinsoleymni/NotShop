@@ -7,6 +7,7 @@ import { useTonConnectUI } from "@tonconnect/ui-react";
 import Button from "~/components/ui/Button";
 import { useCart, type Product as CartProduct } from "~/contexts/CartContext";
 import Share from "~/components/Share";
+import PaymentSuccess from "~/components/PaymentSuccess";
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -22,6 +23,7 @@ export default function Product({ params }: Route.LoaderArgs) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [tonConnectUI] = useTonConnectUI();
     const { cartItems, addToCart, removeFromCart, updateQuantity } = useCart();
+    const [showPaymentSuccess, setShowPaymentSuccess] = useState(false);
 
     const cartItem = cartItems.find(item => item.id === Number(id));
     const isInCart = !!cartItem;
@@ -90,10 +92,12 @@ export default function Product({ params }: Route.LoaderArgs) {
     }
 
     return (
-        <>
+        <div className="flex flex-col h-screen">
+
+            {showPaymentSuccess && <PaymentSuccess onClose={()=> {setShowPaymentSuccess(false)}} />}
             <GeneralHeader title={product.name} icons={[<Share id={id} title={product.name} />]} />
-            <div className="flex flex-col px-4 pb-24">
-                <p className="text-[17px]">
+            <div className="flex pb-20 flex-col px-4 min-h-0 flex-grow">
+                <p className="text-[17px] flex-shrink-0">
                     {product.description}
                 </p>
                 <div className="flex flex-wrap pt-4 pb-5 gap-2">
@@ -113,14 +117,14 @@ export default function Product({ params }: Route.LoaderArgs) {
                     ))}
 
                 </div>
-                <div>
+                <div className="flex-grow overflow-hidden">
                     <img
-                        className="rounded-[20px] w-full h-92 object-cover object-center"
+                        className="rounded-[20px] w-full h-full object-cover object-center"
                         src={product.images[selectedImageIndex]}
                         alt={product.name}
                     />
                 </div>
-                <div className="flex w-full gap-2 pt-4 overflow-x-auto">
+                <div className="flex w-full gap-2 pt-4 overflow-x-auto flex-shrink-0">
                     {product.images.map((image: string, index: number) => (
                         <div
                             key={index}
@@ -146,8 +150,14 @@ export default function Product({ params }: Route.LoaderArgs) {
                 ) : (
                     <Button onClick={handleAddToCart} size="big" variant="ghost">Add to Cart</Button>
                 )}
-                <Button onClick={() => tonConnectUI.openModal()} size="big" variant="primary">Buy Now</Button>
+                <Button onClick={() => {
+                    tonConnectUI.openModal();
+                    setTimeout(()=> {
+                        tonConnectUI.closeModal();
+                        setShowPaymentSuccess(true);
+                    }, 1500)
+                }} size="big" variant="primary">Buy Now</Button>
             </BottomNavigation>
-        </>
+        </div>
     );
 }

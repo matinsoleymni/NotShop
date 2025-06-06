@@ -41,7 +41,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   }, []);
 
-  // Save cart data to localStorage whenever cartItems changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cartItems));
     console.log("Cart saved to localStorage:", cartItems);

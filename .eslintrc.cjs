@@ -24,7 +24,15 @@ module.exports = {
     'react-hooks',
   ],
   rules: {
-    // Add custom rules here
+    'react/react-in-jsx-scope': 'off',
+    'no-unused-vars': 'warn',
+    '@typescript-eslint/no-unused-vars': ['warn'],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'prefer-const': 'warn',
+    'no-console': 'warn',
+    'quotes': ['error', 'single'],
+    'semi': ['error', 'always']
   },
   settings: {
     react: {

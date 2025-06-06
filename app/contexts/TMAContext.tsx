@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { swipeBehavior, requestFullscreen, retrieveLaunchParams, backButton, type LaunchParams } from '@telegram-apps/sdk';
 import type { User } from '@telegram-apps/sdk';
+import { redirect } from 'react-router';
 
 interface TMAContextType {
     launchParams: LaunchParams | undefined;
@@ -16,11 +17,13 @@ export const TMAProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     useEffect(() => {
         const lp = retrieveLaunchParams();
-        // swipeBehavior.mount();
-        // swipeBehavior.enableVertical();
-        // backButton.mount();
-        // backButton.show();
         setLaunchParams(lp);
+
+        if (lp.tgWebAppData?.start_param?.startsWith('product_')) {
+            const productId = lp.tgWebAppData?.start_param.split('_')[1];
+            redirect(`/product/${productId}`);
+        }
+        
     }, []);
 
     return (

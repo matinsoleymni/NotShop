@@ -6,9 +6,8 @@ import {
     Scripts,
     ScrollRestoration,
 } from "react-router";
-
-import type { Route } from "./+types/root";
 import "./app.css";
+import type { Route } from "./+types/root";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { CartProvider } from "./contexts/CartContext";
 import { TMAProvider } from "./contexts/TMAContext";
