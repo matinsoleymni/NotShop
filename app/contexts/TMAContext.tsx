@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { swipeBehavior, retrieveLaunchParams, backButton, type LaunchParams } from '@telegram-apps/sdk';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { init, swipeBehavior, retrieveLaunchParams, backButton, type LaunchParams } from '@telegram-apps/sdk';
 import type { User } from '@telegram-apps/sdk';
-import { redirect } from 'react-router';
+import { useNavigate } from 'react-router';
 
 interface TMAContextType {
     launchParams: LaunchParams | undefined;
@@ -13,19 +13,24 @@ const TMAContext = createContext<TMAContextType | undefined>(undefined);
 export const TMAProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [launchParams, setLaunchParams] = useState<LaunchParams | undefined>(undefined);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
-        swipeBehavior.mount();
-        swipeBehavior.enableVertical();
-        backButton.mount();
-        backButton.show();
-        const lp = retrieveLaunchParams();
-        setLaunchParams(lp);
+        init();
+        if (typeof window !== 'undefined') {
+            swipeBehavior.mount();
+            swipeBehavior.enableVertical();
+            backButton.mount();
+            backButton.show();
+            const lp = retrieveLaunchParams();
+            setLaunchParams(lp);
 
-        if (lp.tgWebAppData?.start_param?.startsWith('product_')) {
-            const productId = lp.tgWebAppData?.start_param.split('_')[1];
-            redirect(`/product/${productId}`);
+            if (lp.tgWebAppData?.start_param?.startsWith('product_')) {
+                const productId = lp.tgWebAppData?.start_param.split('_')[1];
+                console.log(productId)
+                navigate(`/product/${productId}`);
+            }
         }
-
     }, []);
 
     return (

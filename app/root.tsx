@@ -6,8 +6,9 @@ import {
     Scripts,
     ScrollRestoration,
 } from "react-router";
-import "./app.css";
+
 import type { Route } from "./+types/root";
+import "./app.css";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { CartProvider } from "./contexts/CartContext";
 import { TMAProvider } from "./contexts/TMAContext";
@@ -28,24 +29,24 @@ export const links: Route.LinksFunction = () => [
 export function Layout({ children }: { children: React.ReactNode }) {
     return (
         <TonConnectUIProvider manifestUrl="/tonconnect-manifest.json">
-            <TMAProvider>
-                <html lang="en">
-                    <head>
-                        <meta charSet="utf-8" />
-                        <meta name="viewport" content="width=device-width, initial-scale=1" />
-                        <Meta />
-                        <Links />
-                    </head>
-                    <body className="h-full xl:mx-80">
+            <html lang="en">
+                <head>
+                    <meta charSet="utf-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <Meta />
+                    <Links />
+                </head>
+                <body className="h-full xl:mx-80">
+                    <TMAProvider>
                         <CartProvider>
                             {children}
                             <div id="modal-root"></div>
                         </CartProvider>
-                        <ScrollRestoration />
-                        <Scripts />
-                    </body>
-                </html>
-            </TMAProvider>
+                    </TMAProvider>
+                    <ScrollRestoration />
+                    <Scripts />
+                </body>
+            </html>
         </TonConnectUIProvider>
     );
 }
