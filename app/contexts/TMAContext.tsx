@@ -25,7 +25,7 @@ export const TMAProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             } else {
                 backButton.show();
                 backButton.onClick(() => {
-                    navigate(-1);
+                    navigate('/');
                 });
             }
 
