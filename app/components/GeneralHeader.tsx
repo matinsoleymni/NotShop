@@ -1,9 +1,4 @@
-import { type ReactNode } from 'react';
-
-interface HeaderProps {
-    title: string;
-    icons: ReactNode[]; // or JSX.Element[] can also work
-}
+import type { HeaderProps } from '../types/HeaderProps';
 
 export default function GeneralHeader({ title, icons }: HeaderProps) {
     return (

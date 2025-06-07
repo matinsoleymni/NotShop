@@ -1,11 +1,7 @@
 import { shareURL } from "@telegram-apps/sdk";
 import Button from "./ui/Button";
 import Shear from "../assets/icons/share.svg?react";
-
-interface ShareProps {
-    id: number|string;
-    title: string
-}
+import type { ShareProps } from '../types/ShareProps';
 
 export default function Share({ id, title }: ShareProps) {
     const handleShare = async () => {

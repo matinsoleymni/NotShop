@@ -1,14 +1,6 @@
 import { useState, useRef, type TouchEvent } from "react";
 import { NavLink } from "react-router";
-
-interface ShopCartProps {
-    id: number;
-    images: string[];
-    name: string;
-    price: number;
-    currency: string;
-    isInCart: boolean;
-}
+import type { ShopCartProps } from '../types/ShopCartProps';
 
 export default function ShopCart({
     id,

@@ -4,10 +4,8 @@ import Button from "./ui/Button";
 import { formatPrice } from "~/utils/formatPrice";
 import { useCart } from "~/contexts/CartContext";
 import { useTonConnectUI } from "@tonconnect/ui-react";
-
-interface CartModalProps extends PropsWithChildren {
-    className?: string
-}
+import type { CartModalProps } from "../types/CartModalProps";
+import type { Product } from "../types/Product";
 
 export default function CartModal({ children, className }: CartModalProps) {
     const [isOpen, setIsOpen] = useState(false);

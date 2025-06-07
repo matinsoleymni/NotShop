@@ -1,8 +1,6 @@
 import Button from "./ui/Button";
+import type { PaymentSuccessProps } from '../types/PaymentSuccessProps';
 
-interface PaymentSuccessProps{
-    onClose: (() => void);
-}
 export default function PaymentSuccess({onClose}: PaymentSuccessProps){
 
     return (

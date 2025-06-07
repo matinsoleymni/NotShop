@@ -1,12 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { init, swipeBehavior, retrieveLaunchParams, backButton, type LaunchParams } from '@telegram-apps/sdk';
-import type { User } from '@telegram-apps/sdk';
 import { useNavigate } from 'react-router';
-
-interface TMAContextType {
-    launchParams: LaunchParams | undefined;
-    user: User | undefined;
-}
+import type { TMAContextType } from '../types/TMAContextType';
 
 const TMAContext = createContext<TMAContextType | undefined>(undefined);
 

@@ -1,12 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import SearchIcon from "../assets/icons/search.svg?react";
-import type { Dispatch, SetStateAction } from "react";
 import { useProductStore } from "~/stores/products";
-
-interface SearchInputProps {
-    setShowSearch: Dispatch<SetStateAction<boolean>>;
-    isVisible: boolean;
-}
+import type { SearchInputProps } from '../types/SearchInputProps';
 
 export default function SearchInput({
     setShowSearch,

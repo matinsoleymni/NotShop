@@ -18,6 +18,7 @@ This document provides end-to-end documentation for the `app/` directory and its
     - [routes/](routes.md)
     - [services/](services.md)
     - [stores/](stores.md)
+    - [types/](types.md)
     - [utils/](utils.md)
 4. [bot/](bot.md)
 
@@ -96,6 +97,10 @@ This directory contains state management stores, likely using a library like Zus
 ### utils/
 
 This directory contains utility functions used across the application.
+
+### types/
+
+This directory contains types.
 
 ### bot/
 

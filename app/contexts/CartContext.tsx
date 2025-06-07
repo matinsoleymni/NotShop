@@ -1,26 +1,6 @@
 import { createContext, useState, useEffect, useContext, type ReactNode } from 'react';
-
-export interface Product {
-  id: number;
-  name: string;
-  category: string;
-  description: string;
-  price: number;
-  currency: string;
-  left: number;
-  tags: { [key: string]: string };
-  images: string[];
-  quantity: number;
-}
-
-interface CartContextType {
-  cartItems: Product[];
-  cartItemCount: number;
-  addToCart: (product: Product) => void;
-  removeFromCart: (productId: number) => void;
-  updateQuantity: (productId: number, quantity: number) => void;
-  clearCart: () => void;
-}
+import type { Product } from '../types/Product';
+import type { CartContextType } from '../types/CartContextType';
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 

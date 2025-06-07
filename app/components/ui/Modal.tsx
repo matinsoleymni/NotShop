@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  className?: string;
-}
+import type { ModalProps } from '../../types/ModalProps';
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className }) => {
   const [shouldRender, setShouldRender] = useState(false);

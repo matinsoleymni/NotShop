@@ -1,10 +1,6 @@
 import React from 'react';
 import NotLogo from "../assets/icons/logo.svg?react";
-
-interface NotLogoPlaceholderProps {
-  width: string;
-  height: string;
-}
+import type { NotLogoPlaceholderProps } from '../types/NotLogoPlaceholderProps';
 
 const NotLogoPlaceholder: React.FC<NotLogoPlaceholderProps> = ({ width, height }) => {
   return (

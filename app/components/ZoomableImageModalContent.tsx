@@ -1,9 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-
-interface ZoomableImageModalContentProps {
-  imageUrl: string;
-  onClose: () => void;
-}
+import type { ZoomableImageModalContentProps } from '../types/ZoomableImageModalContentProps';
 
 const ZoomableImageModalContent: React.FC<ZoomableImageModalContentProps> = ({ imageUrl, onClose }) => {
   const [zoomLevel, setZoomLevel] = useState(1);

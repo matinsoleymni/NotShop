@@ -1,28 +1,6 @@
 import { create } from 'zustand';
 import { getAllProducts } from '../services/api/product';
-
-export interface Product {
-    id: number;
-    name: string;
-    category: string;
-    price: number;
-    currency: string;
-    description: string;
-    left: number;
-    tags: { [key: string]: any };
-    images: string[];
-}
-
-interface ProductStore {
-    products: Product[];
-    loading: boolean;
-    error: string | null;
-    searchTerm: string;
-    fetchProducts: () => Promise<void>;
-    setSearchTerm: (term: string) => void;
-    getFilteredProducts: () => Product[];
-    getProductById: (id: number) => Product | null;
-}
+import type { ProductStore } from '../types/ProductStore';
 
 export const useProductStore = create<ProductStore>((set, get) => ({
     products: [],

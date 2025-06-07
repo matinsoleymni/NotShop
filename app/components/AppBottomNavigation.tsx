@@ -3,10 +3,7 @@ import NotLogo from "../assets/icons/logo.svg?react";
 import BottomNavigation from "~/components/BottomNavigation";
 import { useTMA } from "~/contexts/TMAContext";
 import { useState } from "react";
-
-interface AppBottomNavigationProps {
-    cartContent?: React.ReactNode;
-}
+import type { AppBottomNavigationProps } from "../types/AppBottomNavigationProps";
 
 export default function AppBottomNavigation({ cartContent }: AppBottomNavigationProps) {
     const { user } = useTMA();

@@ -1,22 +1,7 @@
 import { create } from 'zustand';
 import { getHistory } from '../services/api/history';
-
-interface HistoryItem {
-    timestamp: number;
-    id: number;
-    total: number;
-    currency: string;
-}
-
-interface HistoryStore {
-    history: HistoryItem[];
-    displayedHistory: HistoryItem[];
-    itemsToDisplay: number;
-    loading: boolean;
-    error: string | null;
-    fetchHistory: () => Promise<void>;
-    loadMoreHistory: () => void;
-}
+import type { HistoryItem } from '../types/HistoryItem';
+import type { HistoryStore } from '../types/HistoryStore';
 
 export const useHistoryStore = create<HistoryStore>((set, get) => ({
     history: [],
