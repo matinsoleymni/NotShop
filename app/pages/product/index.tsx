@@ -10,6 +10,8 @@ import { useCart, type Product as CartProduct } from "~/contexts/CartContext";
 import Share from "~/components/Share";
 import PaymentSuccess from "~/components/PaymentSuccess";
 import type { Route } from "../../+types/root";
+import { useNavigate } from "react-router";
+import NotLogoPlaceholder from "~/components/NotLogoPlaceholder";
 
 
 export default function ProductPage({ params }: Route.LoaderArgs) {
@@ -26,6 +28,7 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
     const cartItem = cartItems.find(item => item.id === Number(id));
     const isInCart = !!cartItem;
     const quantity = cartItem ? cartItem.quantity : 0;
+    const navigate = useNavigate();
 
     useEffect(()=> {
         const fetchedProduct = getProductById(Number(id));
@@ -74,11 +77,11 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
                         <div className="h-6 w-16 bg-gray-300 rounded-full"></div>
                         <div className="h-6 w-24 bg-gray-300 rounded-full"></div>
                     </div>
-                    <div className="w-full h-92 bg-gray-300 rounded-[20px] mb-4"></div>
+                    <NotLogoPlaceholder width="100%" height="288px" />
                     <div className="flex w-full gap-2 pt-4 overflow-x-auto">
-                        <div className="min-w-[100px] min-h-[100px] aspect-square bg-gray-300 rounded-xl"></div>
-                        <div className="min-w-[100px] min-h-[100px] aspect-square bg-gray-300 rounded-xl"></div>
-                        <div className="min-w-[100px] min-h-[100px] aspect-square bg-gray-300 rounded-xl"></div>
+                        <NotLogoPlaceholder width="100px" height="100px" />
+                        <NotLogoPlaceholder width="100px" height="100px" />
+                        <NotLogoPlaceholder width="100px" height="100px" />
                     </div>
                 </div>
                 <BottomNavigation className="gap-3">
@@ -142,22 +145,30 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
                 </div>
             </div>
             <BottomNavigation className="gap-3">
-                {isInCart ? (
-                    <div className="flex items-center justify-center gap-2">
-                        <Button className="h4 cursor-pointer" onClick={handleDecrementQuantity} size="big" variant="ghost">-</Button>
-                        <p className="h3">{quantity}</p>
-                        <Button className="h4 cursor-pointer" onClick={handleIncrementQuantity} size="big" variant="ghost">+</Button>
-                    </div>
+                {product.left === 0 ? (
+                    <Button className="col-span-2" size="big" variant="primary" disabled onClick={() => navigate('/')}>
+                        Out of Stock
+                    </Button>
                 ) : (
-                    <Button onClick={handleAddToCart} size="big" variant="ghost">Add to Cart</Button>
+                    <>
+                        {isInCart ? (
+                            <div className="flex items-center justify-center gap-2">
+                                <Button className="h4 cursor-pointer" onClick={handleDecrementQuantity} size="big" variant="ghost">-</Button>
+                                <p className="h3">{quantity}</p>
+                                <Button className="h4 cursor-pointer" onClick={handleIncrementQuantity} size="big" variant="ghost" disabled={quantity >= product.left}>+</Button>
+                            </div>
+                        ) : (
+                            <Button onClick={handleAddToCart} size="big" variant="ghost">Add to Cart</Button>
+                        )}
+                        <Button onClick={() => {
+                            tonConnectUI.openModal();
+                            setTimeout(()=> {
+                                tonConnectUI.closeModal();
+                                setShowPaymentSuccess(true);
+                            }, 1500)
+                        }} size="big" variant="primary">Buy Now</Button>
+                    </>
                 )}
-                <Button onClick={() => {
-                    tonConnectUI.openModal();
-                    setTimeout(()=> {
-                        tonConnectUI.closeModal();
-                        setShowPaymentSuccess(true);
-                    }, 1500)
-                }} size="big" variant="primary">Buy Now</Button>
             </BottomNavigation>
 
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} className="!rounded-t-none !p-0 !bg-transparent !shadow-none !w-screen !h-screen !items-center !justify-center">

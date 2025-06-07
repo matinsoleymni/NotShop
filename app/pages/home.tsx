@@ -1,10 +1,9 @@
 import Header from "~/components/HomeHeader";
 import ShopCart from "~/components/ShopCart";
-import BottomNavigation from "~/components/BottomNavigation";
+import AppBottomNavigation from "~/components/AppBottomNavigation";
 import { useProductStore } from "~/stores/products";
 import { useEffect } from "react";
-import { NavLink } from "react-router";
-import NotLogo from "../assets/icons/logo.svg?react";
+import NotLogoPlaceholder from "~/components/NotLogoPlaceholder";
 import { useCart } from "../contexts/CartContext";
 import CartModal from "~/components/CartModal";
 import Button from "~/components/ui/Button";
@@ -41,7 +40,7 @@ export default function HomePage() {
                                     key={`placholder-image` + index}
                                     className="bg-gray-200 flex items-center justify-around dark:bg-gray-800 h-40 animate-pulse rounded-md"
                                 >
-                                    <NotLogo className="w-32 h-32 opacity-40" />
+                                    <NotLogoPlaceholder width="100%" height="160px" />
                                 </div>
                                 <div
                                     key={`placholder-title` + index}
@@ -80,37 +79,15 @@ export default function HomePage() {
                     </div>
                 )}
             </div>
-            <BottomNavigation>
-                {cartItems.length ? (
-                    <CartModal className="col-span-full">
-                        <Button className="w-full" variant="primary" size="big">Boy for {formatPrice(totalPrice, cartItems.length > 0 ? cartItems[0].currency : 'USD')}</Button>
-                    </CartModal>
-                ) : (
-                    <>
-                        <NavLink to="/" className={({ isActive }) =>
-                            isActive
-                                ? "flex flex-col items-center"
-                                : "flex flex-col items-center opacity-50"}>
-                            <NotLogo className="w-6 h-6 mx-auto dark:invert-100" />
-                            <p className="mt-1 text-[10px] font-medium">Store</p>
-                        </NavLink>
-                        <NavLink to="/profile" className={({ isActive }) =>
-                            isActive
-                                ? "flex flex-col items-center"
-                                : "flex flex-col items-center opacity-50"}>
-                            {user?.photo_url ? (
-                                <img src={user?.photo_url} className="w-6 h-6 rounded-full object-top mx-auto" />
-                            ) : (
-                                <span className="w-6 h-6 rounded-full object-top mx-auto bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-                                    {user?.first_name?.[0]}{user?.last_name?.[0]}
-                                </span>
-                            )}
-
-                            <p className="mt-1 text-[10px] font-medium">{user?.first_name}</p>
-                        </NavLink>
-                    </>
-                )}
-            </BottomNavigation>
+            <AppBottomNavigation
+                cartContent={
+                    cartItems.length ? (
+                        <CartModal className="col-span-full">
+                            <Button className="w-full" variant="primary" size="big">Boy for {formatPrice(totalPrice, cartItems.length > 0 ? cartItems[0].currency : 'USD')}</Button>
+                        </CartModal>
+                    ) : undefined
+                }
+            />
         </>
     );
 }

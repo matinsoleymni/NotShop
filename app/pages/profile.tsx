@@ -1,17 +1,18 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTMA } from "~/contexts/TMAContext";
 import { useHistoryStore } from '../stores/history';
 import { useProductStore } from '../stores/products';
 import { formatPrice } from '../utils/formatPrice';
-import BottomNavigation from '~/components/BottomNavigation';
 import { NavLink } from 'react-router';
 import NotLogo from "../assets/icons/logo.svg?react";
+import AppBottomNavigation from "~/components/AppBottomNavigation";
 
 
 export default function ProfilePage() {
     const { user } = useTMA();
     const { history, displayedHistory, loading, fetchHistory, loadMoreHistory } = useHistoryStore();
     const { products, fetchProducts } = useProductStore();
+    const [profileImageError, setProfileImageError] = useState(false);
 
     useEffect(() => {
         fetchHistory();
@@ -42,8 +43,12 @@ export default function ProfilePage() {
         <>
             <div className="flex flex-col h-full pt-10 px-4">
                 <div className="text-center space-y-2">
-                    {user?.photo_url ? (
-                        <img src={user?.photo_url} className="w-30 h-30 rounded-full object-top mx-auto" />
+                    {user?.photo_url && !profileImageError ? (
+                        <img
+                            src={user?.photo_url}
+                            className="w-30 h-30 rounded-full object-top mx-auto"
+                            onError={() => setProfileImageError(true)}
+                        />
                     ) : (
                         <span className="w-30 h-30 text-3xl rounded-full object-top mx-auto bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
                             {user?.first_name?.[0]}{user?.last_name?.[0]}
@@ -113,31 +118,7 @@ export default function ProfilePage() {
                     )}
                 </div>
             </div>
-            <BottomNavigation>
-                <>
-                    <NavLink to="/" className={({ isActive }) =>
-                        isActive
-                            ? "flex flex-col items-center"
-                            : "flex flex-col items-center opacity-50"}>
-                        <NotLogo className="w-6 h-6 mx-auto dark:invert-100" />
-                        <p className="mt-1 text-[10px] font-medium">Store</p>
-                    </NavLink>
-                    <NavLink to="/profile" className={({ isActive }) =>
-                        isActive
-                            ? "flex flex-col items-center"
-                            : "flex flex-col items-center opacity-50"}>
-                        {user?.photo_url ? (
-                            <img src={user?.photo_url} className="w-6 h-6 rounded-full object-top mx-auto" />
-                        ) : (
-                            <span className="w-6 h-6 rounded-full object-top mx-auto bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-                                {user?.first_name?.[0]}{user?.last_name?.[0]}
-                            </span>
-                        )}
-
-                        <p className="mt-1 text-[10px] font-medium">{user?.first_name}</p>
-                    </NavLink>
-                </>
-            </BottomNavigation>
+            <AppBottomNavigation />
         </>
     );
 }

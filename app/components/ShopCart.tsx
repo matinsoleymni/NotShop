@@ -62,18 +62,22 @@ export default function ShopCart({
         setDeltaX(currentX - startX);
     };
 
-    const handleMouseUp = () => {
+    const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
         const swipeThreshold = 50;
-        if (deltaX > swipeThreshold) {
-            // Swipe right
-            setCurrentImageIndex((prevIndex) =>
-                prevIndex > 0 ? prevIndex - 1 : images.length - 1
-            );
-        } else if (deltaX < -swipeThreshold) {
-            // Swipe left
-            setCurrentImageIndex((prevIndex) =>
-                prevIndex < images.length - 1 ? prevIndex + 1 : 0
-            );
+        if (Math.abs(deltaX) > swipeThreshold) {
+            // Swipe occurred, prevent default link behavior
+            e.preventDefault();
+            if (deltaX > swipeThreshold) {
+                // Swipe right
+                setCurrentImageIndex((prevIndex) =>
+                    prevIndex > 0 ? prevIndex - 1 : images.length - 1
+                );
+            } else if (deltaX < -swipeThreshold) {
+                // Swipe left
+                setCurrentImageIndex((prevIndex) =>
+                    prevIndex < images.length - 1 ? prevIndex + 1 : 0
+                );
+            }
         }
         setStartX(null);
         setDeltaX(0);
@@ -94,7 +98,7 @@ export default function ShopCart({
                 >
                     <img
                         draggable={false}
-                        className="rounded-2xl aspect-square object-cover"
+                        className="rounded-2xl relative aspect-square object-cover"
                         src={images[currentImageIndex]}
                         alt={name}
                         width={160}
