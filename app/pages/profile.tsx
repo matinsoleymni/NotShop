@@ -3,8 +3,6 @@ import { useTMA } from "~/contexts/TMAContext";
 import { useHistoryStore } from '../stores/history';
 import { useProductStore } from '../stores/products';
 import { formatPrice } from '../utils/formatPrice';
-import { NavLink } from 'react-router';
-import NotLogo from "../assets/icons/logo.svg?react";
 import AppBottomNavigation from "~/components/AppBottomNavigation";
 
 

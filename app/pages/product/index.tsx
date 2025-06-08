@@ -1,22 +1,23 @@
 import GeneralHeader from "~/components/GeneralHeader";
-import { useProductStore, type Product } from "~/stores/products";
+import { useProductStore } from "~/stores/products";
+import type { Product } from "~/types/Product";
 import { useEffect, useState } from "react";
 import BottomNavigation from "~/components/BottomNavigation";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import Button from "~/components/ui/Button";
 import Modal from "~/components/ui/Modal";
 import ZoomableImageModalContent from "~/components/ZoomableImageModalContent";
-import { useCart, type Product as CartProduct } from "~/contexts/CartContext";
+import { useCart } from "~/contexts/CartContext";
 import Share from "~/components/Share";
 import PaymentSuccess from "~/components/PaymentSuccess";
 import type { Route } from "../../+types/root";
 import { useNavigate } from "react-router";
-import NotLogoPlaceholder from "~/components/NotLogoPlaceholder";
+import { ProductPlaceholder } from "./placeholders";
 
 
 export default function ProductPage({ params }: Route.LoaderArgs) {
     const id = params.product;
-    const { getProductById, products } = useProductStore();
+    const { getProductById, products, setSearchTerm } = useProductStore();
     const [product, setProduct] = useState<Product | null>(null);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [tonConnectUI] = useTonConnectUI();
@@ -31,6 +32,7 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
     const navigate = useNavigate();
 
     useEffect(()=> {
+        setSearchTerm("");
         const fetchedProduct = getProductById(Number(id));
         setProduct(fetchedProduct);
     }, [id, getProductById, products]);
@@ -43,7 +45,7 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
 
     const handleAddToCart = () => {
         if (product) {
-            const productToAdd: CartProduct = { ...product, quantity: 1 };
+            const productToAdd: Product = { ...product, quantity: 1 };
             addToCart(productToAdd);
         }
     };
@@ -65,31 +67,7 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
     };
 
     if (!product) {
-        return (
-            <>
-                <GeneralHeader title="Loading..." icons={[]} />
-                <div className="flex flex-col px-4 pb-24 animate-pulse">
-                    <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
-                    <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-                    <div className="h-4 bg-gray-300 rounded w-5/6 mb-4"></div>
-                    <div className="flex flex-wrap pt-4 pb-5 gap-2">
-                        <div className="h-6 w-20 bg-gray-300 rounded-full"></div>
-                        <div className="h-6 w-16 bg-gray-300 rounded-full"></div>
-                        <div className="h-6 w-24 bg-gray-300 rounded-full"></div>
-                    </div>
-                    <NotLogoPlaceholder width="100%" height="288px" />
-                    <div className="flex w-full gap-2 pt-4 overflow-x-auto">
-                        <NotLogoPlaceholder width="100px" height="100px" />
-                        <NotLogoPlaceholder width="100px" height="100px" />
-                        <NotLogoPlaceholder width="100px" height="100px" />
-                    </div>
-                </div>
-                <BottomNavigation className="gap-3">
-                    <div className="h-12 w-full bg-gray-300 rounded-lg"></div>
-                    <div className="h-12 w-full bg-gray-300 rounded-lg"></div>
-                </BottomNavigation>
-            </>
-        );
+        return <ProductPlaceholder />;
     }
 
     return (
@@ -165,7 +143,7 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
                             setTimeout(()=> {
                                 tonConnectUI.closeModal();
                                 setShowPaymentSuccess(true);
-                            }, 1500)
+                            }, 2000)
                         }} size="big" variant="primary">Buy Now</Button>
                     </>
                 )}
