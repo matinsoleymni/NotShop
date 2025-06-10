@@ -1,4 +1,3 @@
-import { type PropsWithChildren } from 'react';
 import type { BottomNavigationProps } from '../types/BottomNavigationProps';
 
 export default function BottomNavigation({ children, className }: BottomNavigationProps) {

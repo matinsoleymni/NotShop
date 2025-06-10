@@ -7,11 +7,13 @@ import {
     ScrollRestoration,
 } from "react-router";
 
+import { Suspense } from 'react';
 import type { Route } from "./+types/root";
 import "./app.css";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { CartProvider } from "./contexts/CartContext";
 import { TMAProvider } from "./contexts/TMAContext";
+import LoadingSpinner from './components/ui/LoadingSpinner';
 
 export const links: Route.LinksFunction = () => [
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -52,7 +54,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-    return <Outlet />;
+    return (
+        <Suspense fallback={<LoadingSpinner />}>
+            <Outlet />
+        </Suspense>
+    );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

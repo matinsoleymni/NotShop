@@ -1,13 +1,14 @@
 import Header from "~/components/HomeHeader";
-import ShopCart from "~/components/ShopCart";
 import AppBottomNavigation from "~/components/AppBottomNavigation";
 import { useProductStore } from "~/stores/products";
-import { useEffect } from "react";
-import { HomeProductsPlaceholder } from "./placeholder";
+import { useEffect, lazy, Suspense } from "react";
+import { HomeProductsPlaceholder, ProductPlaceholder } from "./placeholder";
 import { useCart } from "../../contexts/CartContext";
-import CartModal from "~/components/CartModal";
 import Button from "~/components/ui/Button";
 import { formatPrice } from "~/utils/formatPrice";
+
+const ShopCart = lazy(() => import("~/components/ShopCart"));
+const CartModal = lazy(() => import("~/components/CartModal"));
 
 
 export default function HomePage() {
@@ -38,15 +39,16 @@ export default function HomePage() {
                 {filteredProducts.length > 0 && (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3 gap-y-7 pb-24">
                         {filteredProducts.map((product) => (
-                            <ShopCart
-                                key={`product_` + product.id}
-                                id={product.id}
-                                name={product.name}
-                                images={product.images}
-                                price={product.price}
-                                currency={product.currency}
-                                isInCart={cartItems.find(item => item.id === product.id) ? true : false}
-                            />
+                            <Suspense key={`product_` + product.id} fallback={<ProductPlaceholder index={product.id} />}>
+                                <ShopCart
+                                    id={product.id}
+                                    name={product.name}
+                                    images={product.images}
+                                    price={product.price}
+                                    currency={product.currency}
+                                    isInCart={cartItems.find(item => item.id === product.id) ? true : false}
+                                />
+                            </Suspense>
                         ))}
                     </div>
                 )}
@@ -54,9 +56,11 @@ export default function HomePage() {
             <AppBottomNavigation
                 cartContent={
                     cartItems.length ? (
-                        <CartModal className="col-span-full">
-                            <Button className="w-full" variant="primary" size="big">Boy for {formatPrice(totalPrice, cartItems.length > 0 ? cartItems[0].currency : 'USD')}</Button>
-                        </CartModal>
+                        <Suspense>
+                            <CartModal className="col-span-full">
+                                <Button className="w-full" variant="primary" size="big">Boy for {formatPrice(totalPrice, cartItems.length > 0 ? cartItems[0].currency : 'USD')}</Button>
+                            </CartModal>
+                        </Suspense>
                     ) : undefined
                 }
             />

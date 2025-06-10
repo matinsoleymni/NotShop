@@ -1,5 +1,7 @@
-import ProfilePage from "~/pages/profile";
+import { lazy } from 'react';
 import type { Route } from "../+types/root";
+
+const ProfilePage = lazy(() => import("~/pages/profile"));
 
 export function meta({ }: Route.MetaArgs) {
     return [

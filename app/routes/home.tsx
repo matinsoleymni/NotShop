@@ -1,5 +1,7 @@
-import HomePage from "~/pages/home/index";
+import { lazy } from 'react';
 import type { Route } from "../+types/root";
+
+const HomePage = lazy(() => import("~/pages/home/index"));
 
 export function meta({ }: Route.MetaArgs) {
     return [

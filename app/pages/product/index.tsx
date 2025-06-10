@@ -72,7 +72,6 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
 
     return (
         <div className="flex flex-col h-screen">
-
             {showPaymentSuccess && <PaymentSuccess onClose={()=> {setShowPaymentSuccess(false)}} />}
             <GeneralHeader title={product.name} icons={[<Share id={id as string} title={product.name} />]} />
             <div className="flex pb-24 flex-col px-4 min-h-0 flex-grow">
@@ -130,10 +129,10 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
                 ) : (
                     <>
                         {isInCart ? (
-                            <div className="flex items-center justify-center gap-2">
-                                <Button className="h4 cursor-pointer" onClick={handleDecrementQuantity} size="big" variant="ghost">-</Button>
+                            <div className="flex items-center gap-3 rounded-lg bg-black/8 dark:bg-white/8 justify-center">
+                                <button className="h4 text-black dark:text-white px-1 text-lg py-1 cursor-pointer" onClick={handleDecrementQuantity}>-</button>
                                 <p className="h3">{quantity}</p>
-                                <Button className="h4 cursor-pointer" onClick={handleIncrementQuantity} size="big" variant="ghost" disabled={quantity >= product.left}>+</Button>
+                                <button className="h4 text-black dark:text-white px-1 text-lg py-1 cursor-pointer" onClick={handleIncrementQuantity} disabled={quantity >= product.left}>+</button>
                             </div>
                         ) : (
                             <Button onClick={handleAddToCart} size="big" variant="ghost">Add to Cart</Button>

@@ -129,13 +129,7 @@ export default function ShopCart({
                                     height:
                                         index === currentImageIndex
                                             ? "1px"
-                                            : `${Math.max(
-                                                2,
-                                                5 -
-                                                Math.abs(
-                                                    index -
-                                                    currentImageIndex
-                                                )
+                                            : `${Math.max(2, 5 - Math.abs(index - currentImageIndex)
                                             )}px`,
                                 }}
                             ></div>

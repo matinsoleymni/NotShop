@@ -1,5 +1,7 @@
-import ProductPage from "~/pages/product";
+import { lazy } from 'react';
 import type { Route } from "../+types/root";
+
+const ProductPage = lazy(() => import("~/pages/product"));
 
 export function meta({ }: Route.MetaArgs) {
     return [

@@ -13,7 +13,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       try {
         const parsedCart = JSON.parse(storedCart);
         setCartItems(parsedCart);
-        console.log("Cart loaded from localStorage:", parsedCart);
       } catch (e) {
         console.error("Failed to parse cart data from local storage", e);
         setCartItems([]);
@@ -23,7 +22,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cartItems));
-    console.log("Cart saved to localStorage:", cartItems);
   }, [cartItems]);
 
 

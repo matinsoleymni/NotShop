@@ -7,7 +7,7 @@ const TMAContext = createContext<TMAContextType | undefined>(undefined);
 
 export const TMAProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [launchParams, setLaunchParams] = useState<LaunchParams | undefined>(undefined);
-    const [isTMA, setIsTMA] = useState(false);
+
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -15,7 +15,6 @@ export const TMAProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     useEffect(() => {
         init();
         if (typeof window !== 'undefined') {
-            setIsTMA(true);
             swipeBehavior.mount();
             swipeBehavior.enableVertical();
             backButton.mount();

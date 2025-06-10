@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTMA } from "~/contexts/TMAContext";
-import { useHistoryStore } from '../stores/history';
-import { useProductStore } from '../stores/products';
-import { formatPrice } from '../utils/formatPrice';
+import { useHistoryStore } from '../../stores/history';
+import { useProductStore } from '../../stores/products';
+import { formatPrice } from '../../utils/formatPrice';
 import AppBottomNavigation from "~/components/AppBottomNavigation";
 
 
