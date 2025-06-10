@@ -1,0 +1,35 @@
+{
+  "welcome": "欢迎使用我们的应用程序！",
+  "greeting": "你好",
+  "store": "商店",
+  "profile": "个人资料",
+  "cart_cold": "购物车空空如也",
+  "no_items_yet": "还没有商品",
+  "cart": "购物车",
+  "ok": "确定",
+  "buy_for": "购买",
+  "not_store": "不是商店",
+  "you_got_it": "你明白了！",
+  "purchase_on_the_way": "您的购买正在路上",
+  "awesome": "太棒了",
+  "search_placeholder": "搜索...",
+  "cancel": "取消",
+  "share_error": "分享链接时出现问题",
+  "home": {
+    "notFoundTitle": "未找到",
+    "notFoundDescription": "此样式不存在",
+    "buyButton": "购买"
+  },
+  "product": {
+    "left": "剩余",
+    "outOfStock": "缺货",
+    "addToCart": "加入购物车",
+    "buyNow": "立即购买"
+  },
+  "profilepage": {
+    "history": "历史记录",
+    "noHistoryYet": "还没有历史记录",
+    "letsChangeThat": "让我们改变它",
+    "loadingMoreHistory": "正在加载更多历史记录..."
+  }
+}

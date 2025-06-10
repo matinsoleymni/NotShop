@@ -1,0 +1,35 @@
+{
+  "welcome": "Willkommen in unserer App!",
+  "greeting": "Hallo",
+  "store": "Geschäft",
+  "profile": "Profil",
+  "cart_cold": "Warenkorb ist leer",
+  "no_items_yet": "Noch keine Artikel",
+  "cart": "Warenkorb",
+  "ok": "OK",
+  "buy_for": "Kaufen für",
+  "not_store": "Kein Geschäft",
+  "you_got_it": "Du hast es!",
+  "purchase_on_the_way": "Ihr Einkauf ist unterwegs",
+  "awesome": "Großartig",
+  "search_placeholder": "Suchen...",
+  "cancel": "Abbrechen",
+  "share_error": "Beim Teilen des Links ist ein Problem aufgetreten",
+  "home": {
+    "notFoundTitle": "Nicht gefunden",
+    "notFoundDescription": "Dieser Stil existiert nicht",
+    "buyButton": "Kaufen für"
+  },
+  "product": {
+    "left": "Übrig",
+    "outOfStock": "Nicht auf Lager",
+    "addToCart": "Zum Warenkorb",
+    "buyNow": "Jetzt kaufen"
+  },
+  "profilepage": {
+    "history": "Verlauf",
+    "noHistoryYet": "Noch kein Verlauf",
+    "letsChangeThat": "Ändern wir das",
+    "loadingMoreHistory": "Weitere Verlauf wird geladen..."
+  }
+}

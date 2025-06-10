@@ -1,0 +1,35 @@
+{
+  "welcome": "مرحبًا بك في تطبيقنا!",
+  "greeting": "مرحباً",
+  "store": "المتجر",
+  "profile": "الملف الشخصي",
+  "cart_cold": "السلة فارغة",
+  "no_items_yet": "لا توجد عناصر بعد",
+  "cart": "السلة",
+  "ok": "موافق",
+  "buy_for": "شراء مقابل",
+  "not_store": "ليس متجر",
+  "you_got_it": "لقد فهمت!",
+  "purchase_on_the_way": "مشترياتك في الطريق",
+  "awesome": "رائع",
+  "search_placeholder": "بحث...",
+  "cancel": "إلغاء",
+  "share_error": "حدثت مشكلة أثناء مشاركة الرابط",
+  "home": {
+    "notFoundTitle": "غير موجود",
+    "notFoundDescription": "هذا النمط غير موجود",
+    "buyButton": "شراء مقابل"
+  },
+  "product": {
+    "left": "متبقي",
+    "outOfStock": "نفد المخزون",
+    "addToCart": "إلى السلة",
+    "buyNow": "اشترِ الآن"
+  },
+  "profilepage": {
+    "history": "السجل",
+    "noHistoryYet": "لا يوجد سجل بعد",
+    "letsChangeThat": "دعنا نغير ذلك",
+    "loadingMoreHistory": "جاري تحميل المزيد من السجل..."
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "welcome": "Welcome to our app!",
+  "greeting": "Hello",
+  "store": "Store",
+  "profile": "Profile",
+  "cart_cold": "Cart's cold",
+  "no_items_yet": "No items yet",
+  "cart": "Cart",
+  "ok": "OK",
+  "buy_for": "Buy for",
+  "not_store": "Not Store",
+  "you_got_it": "You Got It!",
+  "purchase_on_the_way": "Your purchase is on the way",
+  "awesome": "Awesome",
+  "search_placeholder": "Search...",
+  "cancel": "Cancel",
+  "share_error": "There was a problem sharing the link",
+  "home": {
+    "notFoundTitle": "Not Found",
+    "notFoundDescription": "This style doesn’t exist",
+    "buyButton": "Buy for"
+  },
+  "product": {
+    "left": "Left",
+    "outOfStock": "Out of Stock",
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now"
+  },
+  "profilepage": {
+    "history": "History",
+    "noHistoryYet": "No history yet",
+    "letsChangeThat": "Let’s change that",
+    "loadingMoreHistory": "Loading more history..."
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "welcome": "Добро пожаловать в наше приложение!",
+  "greeting": "Привет",
+  "store": "Магазин",
+  "profile": "Профиль",
+  "cart_cold": "Корзина пуста",
+  "no_items_yet": "Пока нет товаров",
+  "cart": "Корзина",
+  "ok": "ОК",
+  "buy_for": "Купить за",
+  "not_store": "Не магазин",
+  "you_got_it": "Понятно!",
+  "purchase_on_the_way": "Ваша покупка в пути",
+  "awesome": "Отлично",
+  "search_placeholder": "Поиск...",
+  "cancel": "Отмена",
+  "share_error": "Проблема с отправкой ссылки",
+  "home": {
+    "notFoundTitle": "Не найдено",
+    "notFoundDescription": "Этого стиля не существует",
+    "buyButton": "Купить за"
+  },
+  "product": {
+    "left": "Осталось",
+    "outOfStock": "Нет в наличии",
+    "addToCart": "В корзину",
+    "buyNow": "Купить сейчас"
+  },
+  "profilepage": {
+    "history": "История",
+    "noHistoryYet": "Пока нет истории",
+    "letsChangeThat": "Давайте это изменим",
+    "loadingMoreHistory": "Загрузка истории..."
+  }
+}

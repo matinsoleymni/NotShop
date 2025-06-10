@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import SearchIcon from "../assets/icons/search.svg?react";
 import { useProductStore } from "~/stores/products";
 import type { SearchInputProps } from '../types/SearchInputProps';
@@ -7,6 +8,7 @@ export default function SearchInput({
     setShowSearch,
     isVisible,
 }: SearchInputProps) {
+    const { t } = useTranslation();
     const [search, setSearch] = useState("");
     const { setSearchTerm } = useProductStore();
     const inputRef = useRef<HTMLInputElement>(null);
@@ -44,7 +46,7 @@ export default function SearchInput({
                         value={search}
                         type="text"
                         name="search"
-                        placeholder="Search..."
+                        placeholder={t('search_placeholder')}
                         className="w-[90%] outline-none focus:outline-none"
                     />
                     {search && (
@@ -67,7 +69,7 @@ export default function SearchInput({
                 </div>
             </div>
             <button className="ghost-button" onClick={handleCancelClick}>
-                Cancel
+                {t('cancel')}
             </button>
         </div>
     );

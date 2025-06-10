@@ -1,4 +1,5 @@
 import GeneralHeader from "~/components/GeneralHeader";
+import { useTranslation } from "react-i18next";
 import { useProductStore } from "~/stores/products";
 import type { Product } from "~/types/Product";
 import { useEffect, useState } from "react";
@@ -19,6 +20,7 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
     const id = params.product;
     const { getProductById, products, setSearchTerm } = useProductStore();
     const [product, setProduct] = useState<Product | null>(null);
+    const { t } = useTranslation();
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [tonConnectUI] = useTonConnectUI();
     const { cartItems, addToCart, removeFromCart, updateQuantity } = useCart();
@@ -85,7 +87,7 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
                     </div>
                      <div className="flex text-[12px] bg-black/8 dark:bg-white/8 rounded-full px-2 py-[2px] gap-[2px]">
                         <p className="text-black dark:text-white">{product.left}</p>
-                        <p className="text-black/50 dark:text-white/50">Left</p>
+                        <p className="text-black/50 dark:text-white/50">{t("product.left")}</p>
                     </div>
                     { product.tags && Object.entries(product.tags).map(([key, value]) => (
                         <div key={key} className="flex text-[12px] bg-black/8 dark:bg-white/8 rounded-full px-2 py-[2px] gap-[2px]">
@@ -124,7 +126,7 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
             <BottomNavigation className="gap-3">
                 {product.left === 0 ? (
                     <Button className="col-span-2" size="big" variant="primary" disabled onClick={() => navigate('/')}>
-                        Out of Stock
+                        {t("product.outOfStock")}
                     </Button>
                 ) : (
                     <>
@@ -135,7 +137,7 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
                                 <button className="h4 text-black dark:text-white px-1 text-lg py-1 cursor-pointer" onClick={handleIncrementQuantity} disabled={quantity >= product.left}>+</button>
                             </div>
                         ) : (
-                            <Button onClick={handleAddToCart} size="big" variant="ghost">Add to Cart</Button>
+                            <Button onClick={handleAddToCart} size="big" variant="ghost">{t("product.addToCart")}</Button>
                         )}
                         <Button onClick={() => {
                             tonConnectUI.openModal();
@@ -143,7 +145,7 @@ export default function ProductPage({ params }: Route.LoaderArgs) {
                                 tonConnectUI.closeModal();
                                 setShowPaymentSuccess(true);
                             }, 2000)
-                        }} size="big" variant="primary">Buy Now</Button>
+                        }} size="big" variant="primary">{t("product.buyNow")}</Button>
                     </>
                 )}
             </BottomNavigation>

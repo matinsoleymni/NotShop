@@ -7,13 +7,15 @@ import {
     ScrollRestoration,
 } from "react-router";
 
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import type { Route } from "./+types/root";
 import "./app.css";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { CartProvider } from "./contexts/CartContext";
-import { TMAProvider } from "./contexts/TMAContext";
+import { TMAProvider, useTMA } from "./contexts/TMAContext";
 import LoadingSpinner from './components/ui/LoadingSpinner';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from './i18n';
 
 export const links: Route.LinksFunction = () => [
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -26,12 +28,19 @@ export const links: Route.LinksFunction = () => [
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
     },
+    {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap",
+    },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+    const { i18n } = useTranslation();
+    const dir = i18n.language === 'fa' || i18n.language === 'ar' ? 'rtl' : 'ltr';
+
     return (
         <TonConnectUIProvider manifestUrl="/tonconnect-manifest.json">
-            <html lang="en">
+            <html lang={i18n.language} dir={dir}>
                 <head>
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,10 +49,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </head>
                 <body className="h-full xl:mx-80">
                     <TMAProvider>
-                        <CartProvider>
-                            {children}
-                            <div id="modal-root"></div>
-                        </CartProvider>
+                        <I18nextProvider i18n={i18n}>
+                            <LanguageSetter />
+                            <CartProvider>
+                                {children}
+                                <div id="modal-root"></div>
+                            </CartProvider>
+                        </I18nextProvider>
                     </TMAProvider>
                     <ScrollRestoration />
                     <Scripts />
@@ -51,6 +63,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </html>
         </TonConnectUIProvider>
     );
+}
+
+function LanguageSetter() {
+    const { user } = useTMA();
+    const languageCode = user?.language_code;
+
+    useEffect(() => {
+        if (languageCode) {
+            i18n.changeLanguage(languageCode);
+        }
+    }, [languageCode]);
+
+    return null;
 }
 
 export default function App() {

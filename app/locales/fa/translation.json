@@ -1,0 +1,35 @@
+{
+  "welcome": "به برنامه ما خوش آمدید!",
+  "greeting": "سلام",
+  "store": "فروشگاه",
+  "profile": "پروفایل",
+  "cart_cold": "سبد خرید خالی است",
+  "no_items_yet": "هنوز آیتمی اضافه نشده است",
+  "cart": "سبد خرید",
+  "ok": "باشه",
+  "buy_for": "خرید با",
+  "not_store": "نات استور",
+  "you_got_it": "شما آن را دریافت کردید!",
+  "purchase_on_the_way": "خرید شما در راه است",
+  "awesome": "عالی",
+  "search_placeholder": "جستجو...",
+  "cancel": "لغو",
+  "share_error": "مشکلی در اشتراک‌گذاری لینک پیش آمد",
+  "home": {
+    "notFoundTitle": "یافت نشد",
+    "notFoundDescription": "این سبک وجود ندارد",
+    "buyButton": "خرید برای"
+  },
+  "product": {
+    "left": "باقی مانده",
+    "outOfStock": "ناموجود",
+    "addToCart": "افزودن به سبد",
+    "buyNow": "خرید"
+  },
+  "profilepage": {
+    "history": "تاریخچه",
+    "noHistoryYet": "هنوز تاریخی وجود ندارد",
+    "letsChangeThat": "بیایید آن را تغییر دهیم",
+    "loadingMoreHistory": "در حال بارگذاری تاریخچه بیشتر..."
+  }
+}

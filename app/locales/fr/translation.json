@@ -1,0 +1,35 @@
+{
+  "welcome": "Bienvenue sur notre application !",
+  "greeting": "Bonjour",
+  "store": "Magasin",
+  "profile": "Profil",
+  "cart_cold": "Panier vide",
+  "no_items_yet": "Pas encore d'articles",
+  "cart": "Panier",
+  "ok": "OK",
+  "buy_for": "Acheter pour",
+  "not_store": "Pas un magasin",
+  "you_got_it": "Vous l'avez !",
+  "purchase_on_the_way": "Votre achat est en route",
+  "awesome": "Génial",
+  "search_placeholder": "Rechercher...",
+  "cancel": "Annuler",
+  "share_error": "Un problème est survenu lors du partage du lien",
+  "home": {
+    "notFoundTitle": "Non trouvé",
+    "notFoundDescription": "Ce style n'existe pas",
+    "buyButton": "Acheter pour"
+  },
+  "product": {
+    "left": "Restant",
+    "outOfStock": "En rupture de stock",
+    "addToCart": "Au panier",
+    "buyNow": "Acheter maintenant"
+  },
+  "profilepage": {
+    "history": "Historique",
+    "noHistoryYet": "Pas encore d'historique",
+    "letsChangeThat": "Changeons cela",
+    "loadingMoreHistory": "Chargement de l'historique..."
+  }
+}

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTMA } from "~/contexts/TMAContext";
 import { useHistoryStore } from '../../stores/history';
 import { useProductStore } from '../../stores/products';
@@ -7,6 +8,7 @@ import AppBottomNavigation from "~/components/AppBottomNavigation";
 
 
 export default function ProfilePage() {
+    const { t } = useTranslation();
     const { user } = useTMA();
     const { history, displayedHistory, loading, fetchHistory, loadMoreHistory } = useHistoryStore();
     const { products, fetchProducts } = useProductStore();
@@ -57,7 +59,7 @@ export default function ProfilePage() {
                 <div className="mt-8 pb-24 h-full">
                     {loading ? (
                         <>
-                            <h3>History</h3>
+                            <h3>{t('profilepage.history')}</h3>
                             <div className="space-y-3 mt-4" ref={historyListRef}>
                                 {Array.from({ length: 5 }).map((_, index) => (
                                     <div key={index} className="flex items-center justify-between rounded-lg animate-pulse">
@@ -78,12 +80,12 @@ export default function ProfilePage() {
                         </>
                     ) : !loading && displayedHistory.length === 0 ? (
                         <div className='h-full flex justify-center items-center flex-col'>
-                            <h3 className="h1">No history yet</h3>
-                            <p className="">Let’s change that</p>
+                            <h3 className="h1">{t('profilepage.noHistoryYet')}</h3>
+                            <p className="">{t('profilepage.letsChangeThat')}</p>
                         </div>
                     ) : (
                         <>
-                            <h3>History</h3>
+                            <h3>{t('profilepage.history')}</h3>
                             <div className="space-y-3 mt-4" ref={historyListRef}>
                                 {displayedHistory.map(historyItem => {
                                     const product = products.find(p => p.id === historyItem.id);
@@ -112,7 +114,7 @@ export default function ProfilePage() {
                         </>
                     )}
                     {loading && displayedHistory.length > 0 && (
-                        <p className="text-center">Loading more history...</p>
+                        <p className="text-center">{t('profilepage.loadingMoreHistory')}</p>
                     )}
                 </div>
             </div>

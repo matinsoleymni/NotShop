@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import SearchIcon from "../assets/icons/search.svg?react";
 import CartIcon from "../assets/icons/cart.svg?react";
 import CartModal from "./CartModal";
@@ -8,6 +9,7 @@ import { useCart } from "../contexts/CartContext";
 export default function HomeHeader() {
     const [showSearchInput, setShowSearchInput] = useState(false);
     const { cartItemCount } = useCart();
+    const { t } = useTranslation();
 
     return (
         <header className="flex z-50 sticky -top-1 w-full bg-white/50 dark:bg-black/50 backdrop-blur-3xl items-center justify-between mb-2 p-4 dark:text-white text-black">
@@ -16,7 +18,7 @@ export default function HomeHeader() {
                     showSearchInput ? "hidden" : "visible"
                 }`}
             >
-                <h1>Not Store</h1>
+                <h1>{t('not_store')}</h1>
                 <div className="flex items-center gap-2">
                     <SearchIcon
                         className="fill-black dark:fill-white cursor-pointer"

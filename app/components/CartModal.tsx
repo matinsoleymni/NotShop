@@ -1,5 +1,6 @@
 import Modal from "./ui/Modal";
 import { useState, type PropsWithChildren } from "react";
+import { useTranslation } from "react-i18next";
 import Button from "./ui/Button";
 import { formatPrice } from "~/utils/formatPrice";
 import { useCart } from "~/contexts/CartContext";
@@ -10,6 +11,7 @@ import type { Product } from "../types/Product";
 export default function CartModal({ children, className }: CartModalProps) {
     const [isOpen, setIsOpen] = useState(false);
     const { cartItems, cartItemCount, removeFromCart, updateQuantity } = useCart();
+    const { t } = useTranslation();
     const [tonConnectUI] = useTonConnectUI();
 
     const handleOpen = () => setIsOpen(true);
@@ -56,16 +58,16 @@ export default function CartModal({ children, className }: CartModalProps) {
                     {cartItemCount === 0 ? (
                         <div className="flex flex-col items-center justify-center h-full">
                             <h1 className="text-2xl text-black dark:text-white font-bold mb-2 pt-[85px]">
-                                Cart's cold
+                                {t('cart_cold')}
                             </h1>
                             <p className="text-gray-400 text-[17px] pb-[77px]">
-                                No items yet
+                                {t('no_items_yet')}
                             </p>
                         </div>
                     ) : (
                         <div className="flex flex-col items-start w-full">
                             <h1 className="text-2xl w-full text-center text-black dark:text-white font-bold mb-4">
-                                Cart
+                                {t('cart')}
                             </h1>
                             <ul className="w-full pb-4">
                                 {cartItems.map((item) => (
@@ -110,7 +112,7 @@ export default function CartModal({ children, className }: CartModalProps) {
                             size="big"
                             onClick={handleClose}
                         >
-                            OK
+                            {t('ok')}
                         </Button>
                     ) : (
                         <Button
@@ -118,7 +120,7 @@ export default function CartModal({ children, className }: CartModalProps) {
                             size="big"
                             onClick={handelPayment}
                         >
-                            Buy for {formatPrice(totalPrice, cartItems.length > 0 ? cartItems[0].currency : 'USD')}
+                            {t('buy_for')} {formatPrice(totalPrice, cartItems.length > 0 ? cartItems[0].currency : 'USD')}
                         </Button>
                     )}
                 </div>

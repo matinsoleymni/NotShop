@@ -1,0 +1,35 @@
+{
+  "welcome": "Uygulamamıza hoş geldiniz!",
+  "greeting": "Merhaba",
+  "store": "Mağaza",
+  "profile": "Profil",
+  "cart_cold": "Sepet boş",
+  "no_items_yet": "Henüz ürün yok",
+  "cart": "Sepet",
+  "ok": "Tamam",
+  "buy_for": "Şunun için satın al",
+  "not_store": "Mağaza değil",
+  "you_got_it": "Anladın!",
+  "purchase_on_the_way": "Satın alımınız yolda",
+  "awesome": "Harika",
+  "search_placeholder": "Ara...",
+  "cancel": "İptal",
+  "share_error": "Bağlantıyı paylaşırken bir sorun oluştu",
+  "home": {
+    "notFoundTitle": "Bulunamadı",
+    "notFoundDescription": "Bu stil mevcut değil",
+    "buyButton": "Şunun için satın al"
+  },
+  "product": {
+    "left": "Kalan",
+    "outOfStock": "Stokta Yok",
+    "addToCart": "Sepete",
+    "buyNow": "Şimdi Al"
+  },
+  "profilepage": {
+    "history": "Geçmiş",
+    "noHistoryYet": "Henüz geçmiş yok",
+    "letsChangeThat": "Bunu değiştirelim",
+    "loadingMoreHistory": "Daha fazla geçmiş yükleniyor..."
+  }
+}
