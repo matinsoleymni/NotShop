@@ -15,6 +15,7 @@ This document lists the packages used in the project and their purpose.
 *   `react-dom`: Entry point for using React in the browser.
 *   `react-router`: Library for routing in React applications.
 *   `zustand`: A small, fast, and scalable bearbones state-management solution.
+*   `i18next` and `react-i18next`: Used for multy lang.
 
 ## Dev Dependencies
 

@@ -11,7 +11,7 @@ The `components/` directory contains reusable React components used throughout t
 - `SearchInput.tsx`: Component for a search input field.
 - `Share.tsx`: Component for sharing functionality.
 - `ShopCart.tsx`: Component displaying the shopping cart content.
-- `NotLogoPlaceholder.tsx`: A placeholder component displaying the NotLogo with customizable width and height.
+- `Placeholder.tsx`: A placeholder component.
 
 ## ui/
 
@@ -19,3 +19,5 @@ The `ui/` subdirectory contains basic UI components.
 
 - `Button.tsx`: Reusable button component.
 - `Modal.tsx`: Reusable modal component.
+- `LoadingSpinner.tsx`: Reusable Loading component.
+- `LoadingSpinner.css`: Styles of LoadingSpinner.tsx component.
